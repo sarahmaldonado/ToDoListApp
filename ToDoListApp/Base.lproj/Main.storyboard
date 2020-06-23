@@ -33,7 +33,7 @@
                     <navigationItem key="navigationItem" title="ToDo List" id="j9I-oY-kMr">
                         <barButtonItem key="rightBarButtonItem" title="+" image="plus" catalog="system" id="PdD-KJ-0SY">
                             <connections>
-                                <segue destination="PMH-an-d5c" kind="show" id="Ip4-zF-Lus"/>
+                                <segue destination="PMH-an-d5c" kind="show" id="vG7-fm-zcV"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -133,13 +133,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Sqo-MC-eSo"/>
                     </view>
+                    <navigationItem key="navigationItem" id="vLY-Lu-qhh"/>
                     <connections>
                         <outlet property="titleLabel" destination="xob-Gb-im2" id="Buz-On-eUI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jg3-Gj-2X3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2526.0869565217395" y="41.517857142857139"/>
+            <point key="canvasLocation" x="1048" y="775"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3pc-JE-TNh">

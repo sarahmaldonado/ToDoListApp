@@ -14,17 +14,25 @@ class ToDoTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    override func viewWillAppear(_ animated: Bool) {
+          getToDos()
+        }
+        
+        func getToDos(){
+    if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+                
+    if let coreDataToDos = try?
+    context.fetch(ToDoCD.fetchRequest()) as? [ToDoCD] {
+        toDos = coreDataToDos
+        tableView.reloadData()
+                    
+            }
+        }
     }
 
-func getToDos() {
-if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
-    if let coreDataToDos = try? context.fetch(ToDoCD.fetchRequest()) as? [ToDoCD] {
-         // if let theToDos = coreDataToDos {
-              toDos = coreDataToDos
-              tableView.reloadData()
-          }
-        }
-        //toDos = createToDos()
+
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -53,13 +61,20 @@ if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentCont
         return 1
     }
 */
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+   /* override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return toDos.count
     }
+*/
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        //this gives us a single ToDo
+        let toDo = toDos[indexPath.row]
 
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        performSegue(withIdentifier: "moveToComplete", sender: toDo)
+        
+        }
+        /*
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
         let toDo = toDos[indexPath.row]
@@ -74,7 +89,7 @@ if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentCont
 
         return cell
     }
-    
+    */
 
     /*
     //Override to support conditional editing of the table view.
@@ -118,16 +133,17 @@ if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentCont
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let addVC = segue.destination as?
             AddToDoViewController {
-          addVC.previousVC = self }
+            addVC.previousVC = self; }
              if let completeVC = segue.destination as? CompleteToDoViewController {
                if let toDo = sender as? ToDo {
-                 completeVC.selectedToDo = toDo
-                 completeVC.previousVC = self
+                completeVC.selectedToDo = toDo
+                completeVC.previousVC = self
                }
+        }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
     
+    }
+}
 
-}
-}

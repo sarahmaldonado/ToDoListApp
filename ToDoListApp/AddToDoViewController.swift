@@ -9,6 +9,7 @@
 import UIKit
 
 class AddToDoViewController: UIViewController {
+
     var previousVC = ToDoTableViewController()
     
     @IBOutlet weak var importantSwitch: UISwitch!
@@ -18,16 +19,26 @@ class AddToDoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
-   
     @IBAction func addTapped(_ sender: Any) {
-        // we have to grab this view context to be able to work with Core Data
-    if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
-            // we are creating a new ToDoCD object here, naming it toDo
-     let toDo = ToDoCD(entity: ToDoCD.entity(), insertInto: context)
+        
+         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+        //let toDo = ToDo()
+ let toDo = ToDoCD(entity: ToDoCD.entity(), insertInto: context)
             
+         if let titleText = titleTextField.text {
+            
+           toDo.name = titleText
+        toDo.important = importantSwitch.isOn
+          }
+            
+            try? context.save()
+     //   previousVC.toDos.append(toDo)
+       // previousVC.tableView.reloadData()
+    navigationController?.popViewController(animated: true) }
+    }
+/*
         
 
 if let titleText = titleTextField.text {
@@ -54,5 +65,5 @@ if let titleText = titleTextField.text {
         // Pass the selected object to the new view controller.
     }
     */
-
+*/
 }
